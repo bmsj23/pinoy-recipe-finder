@@ -62,11 +62,7 @@ const FavoritesProvider = ({ children }) => {
     favoritesCount: favorites.length,
   };
 
-  return (
-    <FavoritesContext.Provider value={value}>
-      {children}
-    </FavoritesContext.Provider>
-  );
+  return <FavoritesContext.Provider value={value}>{children}</FavoritesContext.Provider>;
 };
 
 export default FavoritesProvider;

@@ -30,9 +30,7 @@ const Favorites = () => {
           <h2 className="text-3xl font-bold text-gray-800 mb-4 font-heading">Your Favorite Recipes</h2>
           <p className="text-gray-600 max-w-2xl mx-auto font-body">
             {favorites.length > 0
-              ? `You have ${favorites.length} favorite recipe${
-                  favorites.length !== 1 ? "s" : ""
-                } saved. Cook them anytime!`
+              ? `You have ${favorites.length} favorite recipe${favorites.length !== 1 ? "s" : ""} saved. Cook them anytime!`
               : "Start building your collection of favorite Filipino recipes."}
           </p>
         </div>
@@ -42,20 +40,13 @@ const Favorites = () => {
             <div className="text-6xl mb-4">💔</div>
             <h3 className="text-xl font-semibold text-gray-700 mb-2 font-heading">No favorites yet</h3>
             <p className="text-gray-500 mb-6 font-body">Browse our recipes and add your favorites to see them here.</p>
-            <Link
-              to="/"
-              className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors duration-200 inline-block font-body">
+            <Link to="/" className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors duration-200 inline-block font-body">
               Explore Recipes
             </Link>
           </div>
         ) : (
           <>
-            {favorites.length > 3 && (
-              <SearchBar
-                searchTerm={searchTerm}
-                onSearchChange={handleSearchChange}
-                placeholder="Search your favorite recipes..." />
-            )}
+            {favorites.length > 3 && <SearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange} placeholder="Search your favorite recipes..." />}
 
             {filteredFavorites.length === 0 && searchTerm ? (
               <div className="text-center py-12">
@@ -76,7 +67,7 @@ const Favorites = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {filteredFavorites.map((recipe) => (
-                    <RecipeCard key={recipe.id} recipe={recipe} />
+                    <RecipeCard key={recipe.id} recipe={recipe} from="favorites" />
                   ))}
                 </div>
               </>
