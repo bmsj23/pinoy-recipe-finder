@@ -42,7 +42,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #e2e2e2;
+  background: #a9a9a9;
 }
 
 @keyframes spin {
