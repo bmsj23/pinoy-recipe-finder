@@ -119,9 +119,9 @@ const RecipeDetail = () => {
                 <button
                   onClick={handleFavoriteToggle}
                   className={`inline-flex items-center space-x-3 px-6 py-3 rounded-xl font-semibold transition-all duration-200 cursor-pointer w-fit font-body ${
-                    isRecipeFavorite ? "bg-red-500 text-white hover:bg-red-600 shadow-lg" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    isRecipeFavorite ? "bg-gray-100 text-gray-700 hover:bg-gray-200" : "bg-red-500 text-white hover:bg-red-600 shadow-lg"
                   }`}>
-                  <span className="text-xl">{isRecipeFavorite ? "❤️" : "🤍"}</span>
+                  <span className="text-xl">{isRecipeFavorite ? "🤍" : "❤️"}</span>
                   <span>{isRecipeFavorite ? "Remove from Favorites" : "Add to Favorites"}</span>
                 </button>
               </div>
