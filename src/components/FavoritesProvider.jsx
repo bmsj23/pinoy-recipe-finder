@@ -1,30 +1,44 @@
 import { useState, useEffect } from "react";
 import { FavoritesContext } from "../contexts/FavoritesContext.js";
 
-const FavoritesProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState([]);
-
-  // Load favorites from localStorage on component mount
-  useEffect(() => {
+// helper function to load favorites from localStorage
+const loadFavoritesFromStorage = () => {
+  try {
     const savedFavorites = localStorage.getItem("pinoy-recipe-favorites");
-    if (savedFavorites) {
-      try {
-        setFavorites(JSON.parse(savedFavorites));
-      } catch (error) {
-        console.error("Error parsing favorites from localStorage:", error);
-        setFavorites([]);
-      }
-    }
-  }, []);
+    console.log("Loading from localStorage:", savedFavorites);
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  } catch (error) {
+    console.error("Error loading favorites:", error);
+    return [];
+  }
+};
 
-  // Save favorites to localStorage whenever favorites change
-  useEffect(() => {
+// helper function to save favorites to localStorage
+const saveFavoritesToStorage = (favorites) => {
+  try {
     localStorage.setItem("pinoy-recipe-favorites", JSON.stringify(favorites));
+    console.log("💾 Saved to localStorage:", favorites);
+  } catch (error) {
+    console.error("Error saving favorites:", error);
+  }
+};
+
+const FavoritesProvider = ({ children }) => {
+  // initialize state with data from localStorage
+  const [favorites, setFavorites] = useState(() => {
+    console.log("Initializing FavoritesProvider...");
+    return loadFavoritesFromStorage();
+  });
+
+  // save sa localStorage tuwing nagbabago ang favorites
+  useEffect(() => {
+    console.log("🔄 Favorites changed, saving to localStorage...", favorites);
+    saveFavoritesToStorage(favorites);
   }, [favorites]);
 
   const addToFavorites = (recipe) => {
     setFavorites((prev) => {
-      // Check if recipe is already in favorites
+      // check kung nasa favs na ang recipe
       if (prev.some((fav) => fav.id === recipe.id)) {
         return prev;
       }

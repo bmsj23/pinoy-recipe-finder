@@ -10,7 +10,7 @@ const Homepage = () => {
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Load recipes on component mount
+  // load recipes on component mount
   useEffect(() => {
     try {
       setRecipes(recipesData);
@@ -22,7 +22,7 @@ const Homepage = () => {
     }
   }, []);
 
-  // Filter recipes based on search term
+  // filter recipes based on search term
   useEffect(() => {
     if (!searchTerm.trim()) {
       setFilteredRecipes(recipes);
@@ -64,14 +64,13 @@ const Homepage = () => {
       <Header />
 
       <main className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">
-            Discover Authentic Filipino Recipes
+        <div className="text-center mb-8 mt-7">
+          <h2 className="text-3xl font-bold text-gray-800 mb-4 font-heading">
+            Discover Authentic Filipino Recipes with PRF
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Explore our collection of traditional Filipino dishes, from classic
-            adobo to hearty sinigang. Find your next favorite meal and bring the
-            flavors of the Philippines to your kitchen.
+          <p className="text-gray-600 max-w-2xl mx-auto text-justify font-body">
+            Explore our collection of traditional Filipino dishes, from the classic
+            adobo to hearty sinigang. Find your next meal in our various recipe selections and discover the ingredients and cooking instructions. Bring the flavors of the Philippines to your kitchen!
           </p>
         </div>
 
@@ -83,10 +82,10 @@ const Homepage = () => {
         {filteredRecipes.length === 0 ? (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">
+            <h3 className="text-xl font-semibold text-gray-700 mb-2 font-heading">
               No recipes found
             </h3>
-            <p className="text-gray-500">
+            <p className="text-gray-500 font-body">
               {searchTerm
                 ? `No recipes match "${searchTerm}". Try a different search term.`
                 : "No recipes available at the moment."}

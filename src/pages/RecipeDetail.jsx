@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { ClipboardList, BookOpen } from "lucide-react";
 import Header from "../components/Header";
 import { useFavorites } from "../hooks/useFavorites";
 import recipesData from "../data/recipes.json";
@@ -81,73 +82,89 @@ const RecipeDetail = () => {
       <Header />
 
       <main className="container mx-auto px-4 py-8">
-        {/* Breadcrumb */}
-        <nav className="mb-6">
-          <Link to="/" className="text-red-600 hover:text-red-700 transition-colors duration-200">
-            ← Back to Recipes
-          </Link>
-        </nav>
+        <div className="max-w-6xl mx-auto">
+          {/* Breadcrumb */}
+          <nav className="mb-6">
+            <Link to="/" className="text-white transition-colors duration-200 font-body bg-red-600 px-3 py-2 rounded-md font-semibold">
+              ← Back to Recipes
+            </Link>
+          </nav>
+          {/* Hero Section */}
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8">
+            <div className="grid md:grid-cols-2 gap-0">
+              {/* Image Section */}
+              <div className="relative h-64 md:h-96">
+                <img
+                  src={recipe.image}
+                  alt={recipe.name}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.src = "/assets/placeholder-recipe.svg";
+                  }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+              </div>
 
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          {/* Recipe Header */}
-          <div className="relative h-64 md:h-80">
-            <img
-              src={recipe.image}
-              alt={recipe.name}
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                e.target.src = "/assets/placeholder-recipe.jpg";
-              }}
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <h1 className="text-3xl md:text-4xl font-bold mb-2">{recipe.name}</h1>
-              <p className="text-lg opacity-90">{recipe.description}</p>
+              {/* Content Section */}
+              <div className="p-8 flex flex-col justify-center">
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-heading">{recipe.name}</h1>
+                <p className="text-lg text-gray-600 leading-relaxed mb-6 font-body">{recipe.description}</p>
+
+                {/* Favorite Button */}
+                <button
+                  onClick={handleFavoriteToggle}
+                  className={`inline-flex items-center space-x-3 px-6 py-3 rounded-xl font-semibold transition-all duration-200 cursor-pointer w-fit font-body ${
+                    isRecipeFavorite
+                      ? "bg-red-500 text-white hover:bg-red-600 shadow-lg"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}>
+                  <span className="text-xl">
+                    {isRecipeFavorite ? "❤️" : "🤍"}
+                  </span>
+                  <span>
+                    {isRecipeFavorite ? "Remove from Favorites" : "Add to Favorites"}
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
 
-          <div className="p-6">
-            {/* Favorite Button */}
-            <div className="mb-6">
-              <button
-                onClick={handleFavoriteToggle}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 cursor-pointer ${
-                  isRecipeFavorite
-                    ? "bg-red-600 text-white hover:bg-red-700"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                }`}>
-                <span className="text-lg">{isRecipeFavorite ? "❤️" : "🤍"}</span>
-                <span>{isRecipeFavorite ? "Remove from Favorites" : "Add to Favorites"}</span>
-              </button>
+          {/* Recipe Content */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Ingredients Card */}
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-red-100 p-3 rounded-xl mr-4">
+                  <ClipboardList className="w-6 h-6 text-red-600" />
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900 font-heading">Ingredients</h2>
+              </div>
+              <div className="space-y-3">
+                {recipe.ingredients.map((ingredient, index) => (
+                  <div key={index} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                    <div className="bg-red-500 w-2 h-2 rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-gray-700 leading-relaxed font-body">{ingredient}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Ingredients */}
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Ingredients</h2>
-                <ul className="space-y-2">
-                  {recipe.ingredients.map((ingredient, index) => (
-                    <li key={index} className="flex items-start space-x-2">
-                      <span className="text-red-600 mt-1">•</span>
-                      <span className="text-gray-700">{ingredient}</span>
-                    </li>
-                  ))}
-                </ul>
+            {/* Instructions Card */}
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-blue-100 p-3 rounded-xl mr-4">
+                  <BookOpen className="w-6 h-6 text-blue-600" />
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900 font-heading">Instructions</h2>
               </div>
-
-              {/* Instructions */}
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Instructions</h2>
-                <ol className="space-y-3">
-                  {recipe.instructions.map((instruction, index) => (
-                    <li key={index} className="flex items-start space-x-3">
-                      <span className="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
-                        {index + 1}
-                      </span>
-                      <span className="text-gray-700 leading-relaxed">{instruction}</span>
-                    </li>
-                  ))}
-                </ol>
+              <div className="space-y-4">
+                {recipe.instructions.map((instruction, index) => (
+                  <div key={index} className="flex items-center space-x-4 p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors duration-200">
+                    <div className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold flex-shrink-0">
+                      {index + 1}
+                    </div>
+                    <span className="text-gray-700 leading-relaxed font-body">{instruction}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

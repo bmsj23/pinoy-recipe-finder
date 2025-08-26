@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Heart } from "lucide-react";
 import { useFavorites } from "../hooks/useFavorites";
 
 const RecipeCard = ({ recipe }) => {
@@ -25,9 +26,8 @@ const RecipeCard = ({ recipe }) => {
             alt={recipe.name}
             className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
             onError={(e) => {
-              e.target.src = "/assets/placeholder-recipe.jpg";
+              e.target.src = "/assets/placeholder-recipe.svg";
             }} />
-          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
 
           {/* Favorites Heart Button */}
           <button
@@ -38,31 +38,24 @@ const RecipeCard = ({ recipe }) => {
                 : "bg-white bg-opacity-90 text-gray-600 hover:bg-opacity-100"
             }`}
             aria-label={isRecipeFavorite ? "Remove from favorites" : "Add to favorites"}>
-            <svg
+            <Heart
               className="w-5 h-5"
               fill={isRecipeFavorite ? "currentColor" : "none"}
-              stroke="currentColor"
-              viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
+              stroke="currentColor" />
           </button>
         </div>
 
         <div className="p-4 flex flex-col flex-grow">
-          <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-red-600 transition-colors duration-200">
+          <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-red-600 transition-colors duration-200 font-heading">
             {recipe.name}
           </h3>
-          <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed flex-grow">{recipe.description}</p>
+          <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed flex-grow font-body">{recipe.description}</p>
 
           <div className="mt-3 flex items-center justify-between">
-            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full font-body">
               {recipe.ingredients?.length || 0} ingredients
             </span>
-            <span className="text-red-600 text-sm font-medium group-hover:text-red-700">View Recipe →</span>
+            <span className="text-red-600 text-sm font-medium group-hover:text-red-700 font-body">View Recipe →</span>
           </div>
         </div>
       </div>
