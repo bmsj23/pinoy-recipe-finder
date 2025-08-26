@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { useFavorites } from "../hooks/useFavorites";
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe, from = 'recipes' }) => {
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
   const handleFavoriteClick = (e) => {
@@ -18,7 +18,10 @@ const RecipeCard = ({ recipe }) => {
 
   const isRecipeFavorite = isFavorite(recipe.id);
   return (
-    <Link to={`/recipe/${recipe.id}`} className="block group">
+    <Link
+      to={`/recipe/${recipe.id}`}
+      state={{ from }}
+      className="block group">
       <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1 h-90 flex flex-col">
         <div className="relative h-48 overflow-hidden flex-shrink-0">
           <img

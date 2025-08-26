@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { ClipboardList, BookOpen } from "lucide-react";
 import Header from "../components/Header";
 import { useFavorites } from "../hooks/useFavorites";
@@ -7,11 +7,18 @@ import recipesData from "../data/recipes.json";
 
 const RecipeDetail = () => {
   const { id } = useParams();
+  const location = useLocation();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
+
+  // determine where user came from for contextual breadcrumb
+  const cameFromFavorites = location.state?.from === "favorites" || (typeof document !== "undefined" && document.referrer.includes("/favorites"));
+
+  const breadcrumbText = cameFromFavorites ? "← Back to Favorites" : "← Back to Recipes";
+  const breadcrumbPath = cameFromFavorites ? "/favorites" : "/";
 
   useEffect(() => {
     try {
@@ -64,9 +71,7 @@ const RecipeDetail = () => {
             <div className="text-6xl mb-4">😞</div>
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Recipe Not Found</h2>
             <p className="text-gray-600 mb-6">{error || "The recipe you're looking for doesn't exist."}</p>
-            <Link
-              to="/"
-              className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors duration-200">
+            <Link to="/" className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors duration-200">
               Back to Recipes
             </Link>
           </div>
@@ -85,8 +90,8 @@ const RecipeDetail = () => {
         <div className="max-w-6xl mx-auto">
           {/* Breadcrumb */}
           <nav className="mb-6">
-            <Link to="/" className="text-white transition-colors duration-200 font-body bg-red-600 px-3 py-2 rounded-md font-semibold">
-              ← Back to Recipes
+            <Link to={breadcrumbPath} className="text-white transition-colors duration-200 font-body bg-red-600 px-3 py-2 rounded-md font-semibold">
+              {breadcrumbText}
             </Link>
           </nav>
           {/* Hero Section */}
@@ -100,7 +105,8 @@ const RecipeDetail = () => {
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.target.src = "/assets/placeholder-recipe.svg";
-                  }} />
+                  }}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
               </div>
 
@@ -113,16 +119,10 @@ const RecipeDetail = () => {
                 <button
                   onClick={handleFavoriteToggle}
                   className={`inline-flex items-center space-x-3 px-6 py-3 rounded-xl font-semibold transition-all duration-200 cursor-pointer w-fit font-body ${
-                    isRecipeFavorite
-                      ? "bg-red-500 text-white hover:bg-red-600 shadow-lg"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    isRecipeFavorite ? "bg-red-500 text-white hover:bg-red-600 shadow-lg" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}>
-                  <span className="text-xl">
-                    {isRecipeFavorite ? "❤️" : "🤍"}
-                  </span>
-                  <span>
-                    {isRecipeFavorite ? "Remove from Favorites" : "Add to Favorites"}
-                  </span>
+                  <span className="text-xl">{isRecipeFavorite ? "❤️" : "🤍"}</span>
+                  <span>{isRecipeFavorite ? "Remove from Favorites" : "Add to Favorites"}</span>
                 </button>
               </div>
             </div>
@@ -159,9 +159,7 @@ const RecipeDetail = () => {
               <div className="space-y-4">
                 {recipe.instructions.map((instruction, index) => (
                   <div key={index} className="flex items-center space-x-4 p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors duration-200">
-                    <div className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold flex-shrink-0">
-                      {index + 1}
-                    </div>
+                    <div className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold flex-shrink-0">{index + 1}</div>
                     <span className="text-gray-700 leading-relaxed font-body">{instruction}</span>
                   </div>
                 ))}
