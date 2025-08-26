@@ -5,7 +5,7 @@ const Header = () => {
   const { favoritesCount } = useFavorites();
 
   return (
-    <header className="bg-red-600 text-white shadow-lg">
+    <header className="bg-red-600 text-white shadow-lg fixed w-full z-10">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
