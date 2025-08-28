@@ -64,14 +64,17 @@ const Homepage = () => {
       <Header />
 
       <main className="container mx-auto px-4 py-8 pt-24">
-        <div className="text-center mb-8 mt-7">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4 font-heading">
-            Discover Authentic Filipino Recipes with PRF
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-justify font-body">
-            Explore our collection of traditional Filipino dishes, from the classic
-            adobo to hearty sinigang. Find your next meal in our various recipe selections and discover the ingredients and cooking instructions. Bring the flavors of the Philippines to your kitchen!
-          </p>
+        <div className="w-full bg-[url(/assets/foodbg.jpg)]">
+          
+          <div className="text-center mb-8 mt-7 opacity-100">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4 font-heading">
+              Discover Authentic Filipino Recipes with PRF
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-justify font-body">
+              Explore our collection of traditional Filipino dishes, from the classic
+              adobo to hearty sinigang. Find your next meal in our various recipe selections and discover the ingredients and cooking instructions. Bring the flavors of the Philippines to your kitchen!
+            </p>
+        </div>
         </div>
 
         <SearchBar

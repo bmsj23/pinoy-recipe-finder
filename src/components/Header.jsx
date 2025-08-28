@@ -17,8 +17,8 @@ const Header = () => {
               Home
             </Link>
             <div className="bg-white rounded-lg px-4 pr-3 py-2 shadow-sm w-34">
-              <Link to="/favorites" className="hover:text-red-700 text-red-600 transition-colors duration-200 font-medium flex items-center justify-between font-body">
-                <span>Favorites</span>
+                <Link to="/favorites" className="hover:text-red-700 text-red-600 transition-colors duration-200 font-medium flex items-center justify-between font-body">
+                  <span>Favorites</span>
                 <span className="bg-red-600 text-white rounded-full px-2 py-1 text-xs font-bold w-8 text-center">{favoritesCount}</span>
               </Link>
             </div>
