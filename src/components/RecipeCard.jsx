@@ -21,13 +21,13 @@ const RecipeCard = ({ recipe, from = 'recipes' }) => {
     <Link
       to={`/recipe/${recipe.id}`}
       state={{ from }}
-      className="block group">
-      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1 h-90 flex flex-col">
+      className="block">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 h-90 flex flex-col">
         <div className="relative h-48 overflow-hidden flex-shrink-0">
           <img
             src={recipe.image}
             alt={recipe.name}
-            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-300"
             onError={(e) => {
               e.target.src = "/assets/placeholder-recipe.svg";
             }} />
@@ -58,7 +58,7 @@ const RecipeCard = ({ recipe, from = 'recipes' }) => {
             <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full font-body">
               {recipe.ingredients?.length || 0} ingredients
             </span>
-            <span className="text-red-600 text-sm font-medium group-hover:text-red-700 font-body">View Recipe →</span>
+            <span className="text-red-600 text-sm font-bold group-hover:text-red-700 font-body">View Recipe 🢂</span>
           </div>
         </div>
       </div>

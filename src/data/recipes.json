@@ -42,7 +42,7 @@
   {
     "id": 6,
     "name": "Crispy Pata",
-    "image": "/assets/crispy-pata.jpg",
+    "image": "/assets/crispy-pata.jpeg",
     "description": "A whole pork leg boiled until tender and then deep-fried until golden and crunchy.",
     "ingredients": ["1 whole pork leg (pata)", "Water", "Soy sauce", "Vinegar", "Garlic", "Bay leaves", "Cooking oil"],
     "instructions": ["Boil pork leg with seasonings until very tender.", "Drain and dry thoroughly, preferably chilling it for a few hours.", "Deep fry until skin is blistered and crispy."]

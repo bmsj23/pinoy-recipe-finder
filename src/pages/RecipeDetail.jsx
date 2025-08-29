@@ -17,7 +17,7 @@ const RecipeDetail = () => {
   // determine where user came from for contextual breadcrumb
   const cameFromFavorites = location.state?.from === "favorites" || (typeof document !== "undefined" && document.referrer.includes("/favorites"));
 
-  const breadcrumbText = cameFromFavorites ? "← Back to Favorites" : "← Back to Recipes";
+  const breadcrumbText = cameFromFavorites ? "🡸 Back to Favorites" : "🡸  Back to Recipes";
   const breadcrumbPath = cameFromFavorites ? "/favorites" : "/";
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const RecipeDetail = () => {
       <main className="container mx-auto px-4 py-8 pt-24">
         <div className="max-w-6xl mx-auto">
           {/* Breadcrumb */}
-          <nav className="mb-6 mt-9">
+          <nav className="mb-8 mt-2">
             <Link to={breadcrumbPath} className="text-white transition-colors duration-200 font-body bg-red-600 px-3 py-2 rounded-md font-semibold">
               {breadcrumbText}
             </Link>
