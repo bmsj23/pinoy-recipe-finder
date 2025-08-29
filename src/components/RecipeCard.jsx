@@ -5,10 +5,7 @@ import { useFavorites } from "../hooks/useFavorites";
 const RecipeCard = ({ recipe, from = "recipes" }) => {
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
-  const handleFavoriteClick = (e) => {
-    e.preventDefault(); // prevent navigation when clicking the heart
-    e.stopPropagation(); // stop event bubbling
-
+  const handleFavoriteClick = () => {
     if (isFavorite(recipe.id)) {
       removeFromFavorites(recipe.id);
     } else {
