@@ -90,7 +90,7 @@
   {
     "id": 12,
     "name": "Chicken Inasal",
-    "image": "/assets/chicken-inasal.jpg",
+    "image": "/assets/chicken-inasal.jpeg",
     "description": "A unique variant of grilled chicken from Bacolod, marinated in a mixture of calamansi, pepper, and annatto.",
     "ingredients": ["1 whole chicken, cut into serving pieces", "Lemongrass", "Ginger", "Garlic", "Calamansi juice", "Vinegar", "Annatto oil for basting"],
     "instructions": ["Marinate chicken in the mixture for at least 4 hours.", "Grill over hot coals while basting with annatto oil.", "Serve with rice and a dipping sauce of soy sauce, vinegar, and calamansi."]
