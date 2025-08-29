@@ -16,15 +16,16 @@ const RecipeCard = ({ recipe, from = "recipes" }) => {
   const isRecipeFavorite = isFavorite(recipe.id);
   return (
     <div className="group">
-      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:bg-gray-50 transition-all duration-300 transform hover:-translate-y-1 h-90 flex flex-col">
-        <div className="relative h-48 overflow-hidden flex-shrink-0">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:bg-gray-50 transition-all duration-300 transform hover:-translate-y-1 h-95 flex flex-col">
+        <div className="relative h-50 overflow-hidden flex-shrink-0">
           <img
             src={recipe.image}
             alt={recipe.name}
             className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-300"
             onError={(e) => {
               e.target.src = "/assets/placeholder-recipe.svg";
-            }} />
+            }}
+          />
 
           {/* Favorites Heart Button */}
           <button
@@ -41,7 +42,8 @@ const RecipeCard = ({ recipe, from = "recipes" }) => {
           <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-red-600 transition-colors duration-200 font-heading">{recipe.name}</h3>
           <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed flex-grow font-body">{recipe.description}</p>
 
-          <div className="mt-3 flex items-center justify-between">
+          {/* --- FIX: Added pt-4 for spacing --- */}
+          <div className="mt-auto pt-4 flex items-center justify-between">
             <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full font-body">{recipe.ingredients?.length || 0} ingredients</span>
             <Link to={`/recipe/${recipe.id}`} state={{ from }} className="text-red-600 text-sm font-bold group-hover:text-red-700 font-body">
               View Recipe 🢂
