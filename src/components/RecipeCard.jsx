@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { useFavorites } from "../hooks/useFavorites";
 
-const RecipeCard = ({ recipe, from = 'recipes' }) => {
+const RecipeCard = ({ recipe, from = "recipes" }) => {
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
   const handleFavoriteClick = (e) => {
@@ -18,11 +18,8 @@ const RecipeCard = ({ recipe, from = 'recipes' }) => {
 
   const isRecipeFavorite = isFavorite(recipe.id);
   return (
-    <Link
-      to={`/recipe/${recipe.id}`}
-      state={{ from }}
-      className="block">
-      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 h-90 flex flex-col">
+    <div className="group">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:bg-gray-50 transition-all duration-300 transform hover:-translate-y-1 h-90 flex flex-col">
         <div className="relative h-48 overflow-hidden flex-shrink-0">
           <img
             src={recipe.image}
@@ -36,33 +33,26 @@ const RecipeCard = ({ recipe, from = 'recipes' }) => {
           <button
             onClick={handleFavoriteClick}
             className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 hover:scale-110 cursor-pointer ${
-              isRecipeFavorite
-                ? "bg-red-500 text-white shadow-lg"
-                : "bg-white bg-opacity-90 text-gray-600 hover:bg-opacity-100"
+              isRecipeFavorite ? "bg-red-500 text-white shadow-lg" : "bg-white bg-opacity-90 text-gray-600 hover:bg-opacity-100"
             }`}
             aria-label={isRecipeFavorite ? "Remove from favorites" : "Add to favorites"}>
-            <Heart
-              className="w-5 h-5"
-              fill={isRecipeFavorite ? "currentColor" : "none"}
-              stroke="currentColor" />
+            <Heart className="w-5 h-5" fill={isRecipeFavorite ? "currentColor" : "none"} stroke="currentColor" />
           </button>
         </div>
 
         <div className="p-4 flex flex-col flex-grow">
-          <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-red-600 transition-colors duration-200 font-heading">
-            {recipe.name}
-          </h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-red-600 transition-colors duration-200 font-heading">{recipe.name}</h3>
           <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed flex-grow font-body">{recipe.description}</p>
 
           <div className="mt-3 flex items-center justify-between">
-            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full font-body">
-              {recipe.ingredients?.length || 0} ingredients
-            </span>
-            <span className="text-red-600 text-sm font-bold group-hover:text-red-700 font-body">View Recipe 🢂</span>
+            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full font-body">{recipe.ingredients?.length || 0} ingredients</span>
+            <Link to={`/recipe/${recipe.id}`} state={{ from }} className="text-red-600 text-sm font-bold group-hover:text-red-700 font-body">
+              View Recipe 🢂
+            </Link>
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
